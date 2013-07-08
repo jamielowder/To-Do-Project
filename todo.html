@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+<head>
+<script type = "text/javascript">
+//Updates user input for now changes the color
+var listed = new Array();
+var number = 0;
+
+//Adds a value from the list
+function add(){
+	var item = document.getElementById('item').value;
+
+	//if empty string do nothing
+	if(item == ""){
+		return;
+	}
+
+	//add the value to the list and add all values back into the list
+	listed[number++]= item;
+	var value= '';
+	for(var i =0; i < listed.length; i++){
+		value = value + '<tr><td value = "'+listed[i]+'">' +listed[i]+ '</td></tr>';
+	}
+
+	//add to to the html
+	document.getElementById('list').innerHTML= value;
+	document.getElementById("item").value= "";//clear the textbox
+}
+
+//check to see if the item is in the document
+function checkToSeeInList(item){
+	var index = -1;
+
+	for(var i = 0; i < listed.length; i++){
+		if(listed[i] == item){
+			index = i;
+			break;
+		}
+	}
+	return index;
+}
+
+//Subtracts a value from the list
+function subtract(){
+	var item = document.getElementById('item').value.trim();
+	//Calls this method to see if the item is in the list
+	var index = checkToSeeInList(item);  
+
+	//Exit loop if can't delete
+	if(index == (-1)){
+		alert("CAN'T DELETE. Item doesn't exist in the list");
+		return;
+	}
+
+	var value= '';
+	//Add back to the list
+	for(var i =0; i < listed.length;){
+		if(i == index){
+			i++;
+		}
+		else{
+			value = value + '<tr><td value = "'+listed[i]+'">' +listed[i]+ '</td></tr>';
+			i++;
+		}
+	}
+	listed.length  = listed.length -1;
+
+	//add to to the html
+	document.getElementById('list').innerHTML= value;
+	document.getElementById("item").value= "";//clear the textbox
+	number--;
+}
+
+//Updates the item in the list
+function update(){
+	var itemPrev = document.getElementById('itemPrev').value.trim();
+	var index = checkToSeeInList(itemPrev);//return-1 if not in the list
+	var value= '';
+	//error checking
+	if(index < 0){
+		alert("Error, Item is not in the list");
+		//document.getElementById('error').value = "Error, Item is not in the list";
+		document.getElementById("itemPrev").value= "";//clear the textbox
+		document.getElementById("itemNew").value= "";//clear the textbox
+
+		return;
+	}
+	var itemNew = document.getElementById('itemNew').value;
+	if(itemNew == ""){
+		return;
+	}
+	//add values back in
+	for(var i =0; i < listed.length; i++){
+		if(index == i){
+			value = value + '<tr><td value = "'+itemNew+'">' +itemNew+ '</td></tr>';
+			listed[i] = itemNew; //replace the value in the list
+		}
+		else{
+			value = value + '<tr><td value = "'+listed[i]+'">' +listed[i]+ '</td></tr>';
+		}
+	}
+
+	document.getElementById('list').innerHTML= value;
+	document.getElementById("itemPrev").value= "";//clear the textbox
+	document.getElementById("itemNew").value= "";//clear the textbox
+
+	
+}
+//End of Script
+</script>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<title>To Do Project</title>
+</head>
+<body>
+<h1>List</h1>
+<div id = "main">
+<p id = "testCase"></p>
+<input type="text" id="item">
+<button onclick="add()">Add</button>
+<button onclick="subtract()">Sub</button>
+<p id= "error" value = ""></p>
+	<table id = "list">
+		<tr>
+			<td>
+			</td>
+		</tr>
+	</table>
+	<div id="updateContainer">
+		<h4>Update this item : </h4>
+		<input type="text" id="itemPrev">
+		<h4><br>To the new item : </h4>
+		<input type="text" id="itemNew"><p id = "error" value = ""></p>
+
+		<button onclick="update()">Update</button>
+	</div>
+</div>
+<p id = "error" value = ""></p>
+<footer>
+</footer>
+</body>
+</html>

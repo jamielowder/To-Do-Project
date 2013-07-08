@@ -1,0 +1,42 @@
+html { 
+  background: url(http://t0.gstatic.com/images?q=tbn:ANd9GcQj1IHwu8CBFtIusjy2P06SdqjFFDmLfOypkuKGMKeNSXI_S7Sn) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body{
+	display: block;
+	font-family: Tahoma;
+}
+
+h1{
+	color: black;
+	font-family: Cursive;
+	text-align: center;
+}
+h4{
+	text-size: 94%;
+}
+#list{
+	border-bottom:2px dotted gray;
+}
+#list tbody{
+	color: rgba(99, 92, 90,70);
+}
+p{
+	color: blue;
+}
+
+#main{
+	background-color: white;
+	border: 2px solid black;
+	margin:0% 30%;
+	padding-left:10%;
+}
+#container{
+	margin:10%;
+	padding: 10% 30% 30% 30%;
+
+}
